@@ -1,10 +1,15 @@
+using Blog_WebAPP.Data;
+using Microsoft.EntityFrameworkCore;
+
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-
+builder.Services.AddDbContext<Db_ContextBlog>(options =>
+   options.UseSqlServer(builder.Configuration.GetConnectionString("Constring")));
 var app = builder.Build();
-
+ 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
